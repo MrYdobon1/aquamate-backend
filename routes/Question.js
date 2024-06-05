@@ -37,6 +37,25 @@ const questionRoutes = [
           }).code(500);
         }
       }
+    },
+    {
+      method: 'DELETE',
+      path: '/api/questions/{id}',
+      handler: async (request, h) => {
+        try {
+          const id = request.params.id;
+          await questionDB.delete(id);
+          return h.response({
+            status: true,
+            message: "Question and its related answers deleted successfully"
+          }).code(200);
+        } catch (e) {
+          return h.response({
+            status: false,
+            message: "Error while deleting question"
+          }).code(500);
+        }
+      }
     }
   ];
   

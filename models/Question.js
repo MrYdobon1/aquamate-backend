@@ -49,7 +49,19 @@ class Question {
   }
 
   static async delete(id) {
-    await db.collection('questions').doc(id).delete();
+    const batch = db.batch();
+
+    // Delete all answers related to the question
+    const answersSnapshot = await db.collection('answers').where('questionId', '==', id).get();
+    answersSnapshot.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+
+    // Delete the question itself
+    const questionRef = db.collection('questions').doc(id);
+    batch.delete(questionRef);
+
+    await batch.commit();
   }
 }
 
