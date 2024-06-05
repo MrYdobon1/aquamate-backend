@@ -1,16 +1,52 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const AnswerSchema = new mongoose.Schema({
-  answer: String,
-  questionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "questions",
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  user: Object,
-});
+const db = require('../db');
+const { FieldValue } = require('@google-cloud/firestore');
 
-module.exports = mongoose.model("Answers", AnswerSchema);
+class Answer {
+  static async create(data) {
+    const answerRef = db.collection('answers').doc();
+    await answerRef.set({
+      ...data,
+      createdAt: FieldValue.serverTimestamp(),
+    });
+    return answerRef.id;
+  }
+
+  static async findById(id) {
+    const answerDoc = await db.collection('answers').doc(id).get();
+    if (!answerDoc.exists) {
+      throw new Error('Answer not found');
+    }
+    return answerDoc.data();
+  }
+
+  static async update(id, data) {
+    const answerRef = db.collection('answers').doc(id);
+    await answerRef.update({
+      ...data,
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+  }
+
+  static async delete(id) {
+    await db.collection('answers').doc(id).delete();
+  }
+}
+
+module.exports = Answer;
+
+// const AnswerSchema = new mongoose.Schema({
+//   answer: String,
+//   questionId: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "questions",
+//   },
+//   createdAt: {
+//     type: Date,
+//     default: Date.now(),
+//   },
+//   user: Object,
+// });
+
+// module.exports = mongoose.model("Answers", AnswerSchema);
