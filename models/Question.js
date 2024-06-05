@@ -1,22 +1,5 @@
-const mongoose = require("mongoose");
 const db = require('../db');
 const { FieldValue } = require('@google-cloud/firestore');
-
-// const QuestionSchema = new mongoose.Schema({
-//   questionName: String,
-//   questionUrl: String,
-//   createdAt: {
-//     type: Date,
-//     default: Date.now(),
-//   },
-//   answers: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "Answers",
-//   },
-//   user: Object,
-// });
-
-// module.exports = mongoose.model("Questions", QuestionSchema);
 
 class Question {
   static async create(data) {

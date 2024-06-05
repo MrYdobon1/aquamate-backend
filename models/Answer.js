@@ -1,5 +1,3 @@
-// const mongoose = require("mongoose");
-
 const db = require('../db');
 const { FieldValue } = require('@google-cloud/firestore');
 
@@ -35,18 +33,3 @@ class Answer {
 }
 
 module.exports = Answer;
-
-// const AnswerSchema = new mongoose.Schema({
-//   answer: String,
-//   questionId: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "questions",
-//   },
-//   createdAt: {
-//     type: Date,
-//     default: Date.now(),
-//   },
-//   user: Object,
-// });
-
-// module.exports = mongoose.model("Answers", AnswerSchema);
