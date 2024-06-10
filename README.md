@@ -1,7 +1,7 @@
 # forum-backend
 
 endpoint for questions
-localhost:8180/api/questions
+localhost:3030/aquamate/questions
 
 endpoint for answers
-localhost:8180/api/answers
+localhost:3030/aquamate/answers
