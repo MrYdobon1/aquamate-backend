@@ -1,10 +1,10 @@
 # forum-backend
 
-endpoint for questions
-localhost:3030/aquamate/questions
+endpoint for questions (GET, POST)
+http://34.101.207.223:3000/aquamate/questions
 
 endpoint for answers
-localhost:3030/aquamate/answers
+http://34.101.207.223:3000/aquamate/answers
 
-endpoint for classification
-localhost:3030/aquamate/predict
+endpoint for classification (GET, POST)
+http://34.101.207.223:3000/aquamate/predict
