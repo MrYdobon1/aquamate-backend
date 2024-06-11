@@ -1,6 +1,7 @@
 const questionRoutes = require('./question');
 const answerRoutes = require('./answer');
 const predictRoutes = require('./predict');
+const dictionaryRoutes = require('./dictionary');
 
 const routes = [
     {
@@ -13,6 +14,7 @@ const routes = [
     ...predictRoutes,
     ...questionRoutes,
     ...answerRoutes,
+    ...dictionaryRoutes
 ];
 
 module.exports = routes;
