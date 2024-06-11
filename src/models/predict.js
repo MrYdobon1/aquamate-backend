@@ -2,9 +2,6 @@ const predictClassification = require('../services/inferenceServices');
 const crypto = require('crypto');
 const db = require('../db');
  
-class Predict{
-  
-}
 async function predictModel(request, h) {
   const { image } = request.payload;
   const { model } = request.server.app;
@@ -48,5 +45,39 @@ async function predictModel(request, h) {
     }).code(500);
   }
 }
+
+async function getAllPredictions(request, h) {
+  const predictionsRef = db.collection('predictions');
+
+  try {
+    const snapshot = await predictionsRef.get();
+    if (snapshot.empty) {
+      return h.response({
+        status: 'success',
+        data: [],
+        message: 'No predictions found'
+      }).code(200);
+    }
+
+    let predictions = [];
+    snapshot.forEach(doc => {
+      predictions.push({ id: doc.id, ...doc.data() });
+    });
+
+    return h.response({
+      status: 'success',
+      data: predictions
+    }).code(200);
+
+  } catch (error) {
+    console.error('Error fetching predictions:', error.message);
+    return h.response({
+      status: 'fail',
+      message: 'Error fetching predictions',
+      error: error.message
+    }).code(500);
+  }
+}
+
  
-module.exports = predictModel;
+module.exports = { predictModel, getAllPredictions };

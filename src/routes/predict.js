@@ -1,4 +1,5 @@
-const predictModel = require('../models/predict');
+const { predictModel, getAllPredictions } = require('../models/predict');
+
  
 const predictRoutes = [
   {
@@ -11,6 +12,12 @@ const predictRoutes = [
         multipart: true
       }
     }
+  },
+
+  {
+    path: '/aquamate/predict',
+    method: 'GET',
+    handler: getAllPredictions,
   }
 ]
  
