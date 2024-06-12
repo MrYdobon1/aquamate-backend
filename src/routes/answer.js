@@ -22,7 +22,10 @@ const answerRoutes = [
             message: "Error while adding answer"
           }).code(500);
         }
-      }
+      },
+      options: {
+        auth: 'jwt'
+    }
     }
   ];
   

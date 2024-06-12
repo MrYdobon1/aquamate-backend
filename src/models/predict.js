@@ -1,5 +1,4 @@
 const predictClassification = require('../services/inferenceServices');
-const crypto = require('crypto');
 const db = require('../db');
  
 async function predictModel(request, h) {
@@ -7,7 +6,6 @@ async function predictModel(request, h) {
   const { model } = request.server.app;
  
   const {label, explanation} = await predictClassification(model, image);
-  const id = crypto.randomUUID();
 
   if (!label || !explanation) {
     return h.response({

@@ -21,7 +21,10 @@ const questionRoutes = [
             message: "Error while adding question"
           }).code(500);
         }
-      }
+      },
+      options: {
+        auth: 'jwt'
+    }
     },
     {
       method: 'GET',
@@ -36,7 +39,10 @@ const questionRoutes = [
             message: "Unable to get the question details"
           }).code(500);
         }
-      }
+      },
+      options: {
+        auth: 'jwt'
+    }
     },
     {
       method: 'DELETE',
@@ -55,7 +61,10 @@ const questionRoutes = [
             message: "Error while deleting question"
           }).code(500);
         }
-      }
+      },
+      options: {
+        auth: 'jwt'
+    }
     }
   ];
   

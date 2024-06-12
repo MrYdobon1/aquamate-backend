@@ -23,7 +23,10 @@ const dictionaryRoutes = [
               message: "Error while adding dictionary"
             }).code(500);
           }
-        }
+        },
+        options: {
+          auth: 'jwt'
+      }
       },
       {
         method: 'GET',
@@ -41,7 +44,10 @@ const dictionaryRoutes = [
               message: "Unable to get the dictionary details"
             }).code(500);
           }
-        }
+        },
+        options: {
+          auth: 'jwt'
+      }
     },
 
     {
@@ -61,7 +67,10 @@ const dictionaryRoutes = [
               message: "Unable to get the dictionary entry details"
             }).code(500);
           }
-        }
+        },
+        options: {
+          auth: 'jwt'
+      }
       }
 
 ]
