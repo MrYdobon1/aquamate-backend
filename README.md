@@ -1,6 +1,6 @@
 # forum-backend
 
-endpoint for questions (GET, POST, DELETE)
+endpoint for questions (GET, POST, DELETE GET by id)
 0.0.0.0:3000/aquamate/questions
 
 endpoint for answers (POST)
