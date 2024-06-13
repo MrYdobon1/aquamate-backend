@@ -9,7 +9,6 @@ const answerRoutes = [
           const id = await answerDB.create({
             answer: request.payload.answer,
             questionId: request.payload.questionId,
-            user: request.payload.user,
           });
           return h.response({
             status: true,
@@ -22,10 +21,11 @@ const answerRoutes = [
             message: "Error while adding answer"
           }).code(500);
         }
-      },
-      options: {
-        auth: 'jwt'
-    }
+      }
+    //   ,
+    //   options: {
+    //     auth: 'jwt'
+    // }
     }
   ];
   

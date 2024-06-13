@@ -11,19 +11,20 @@ const predictRoutes = [
         allow: 'multipart/form-data',
         multipart: true
       }
-    },
-    options: {
-      auth: 'jwt'
-  }
+    }
+  //   ,
+  //   options: {
+  //     auth: 'jwt'
+  // }
   },
 
   {
     path: '/aquamate/predict',
     method: 'GET',
     handler: getAllPredictions,
-        options: {
-          auth: 'jwt'
-      }
+      //   options: {
+      //     auth: 'jwt'
+      // }
   }
 ]
  

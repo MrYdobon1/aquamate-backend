@@ -1,5 +1,6 @@
 const predictClassification = require('../services/inferenceServices');
 const db = require('../db');
+const uploadImage = require('../services/uploadImage');
  
 async function predictModel(request, h) {
   const { image } = request.payload;

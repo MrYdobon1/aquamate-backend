@@ -1,31 +1,50 @@
 const questionDB = require('../models/question');
+const uploadImage = require('../services/uploadImage');
+const Joi = require('joi');
 
 const questionRoutes = [
-    {
-      method: 'POST',
-      path: '/aquamate/questions',
-      handler: async (request, h) => {
-        try {
-          const id = await questionDB.create({
-            questionName: request.payload.questionName,
-            questionUrl: request.payload.questionUrl,
-          });
-          return h.response({
-            status: true,
-            message: "Question added successfully",
-            id: id
-          }).code(201);
-        } catch (e) {
-          return h.response({
-            status: false,
-            message: "Error while adding question"
-          }).code(500);
-        }
+  {
+    method: 'POST',
+    path: '/aquamate/questions',
+    options: {
+      payload: {
+        parse: true,
+        output: 'file',
+        allow: 'multipart/form-data',
+        maxBytes: 2 * 1024 * 1024, // 2MB limit
+        multipart: true,
       },
-      options: {
-        auth: 'jwt'
-    }
+      validate: {
+        payload: Joi.object({
+          questionName: Joi.string().required(),
+          questionImage: Joi.any().required(),
+        }),
+      },
     },
+    handler: async (request, h) => {
+      try {
+        const { questionName, questionImage } = request.payload;
+        const imageUrl = await uploadImage(questionImage);
+
+        const id = await questionDB.create({
+          questionName,
+          questionUrl: imageUrl,
+        });
+
+        return h.response({
+          status: true,
+          message: "Question added successfully",
+          id: id,
+        }).code(201);
+      } catch (e) {
+        console.error(e);
+        return h.response({
+          status: false,
+          message: "Error while adding question",
+        }).code(500);
+      }
+    },
+  },
     {
       method: 'GET',
       path: '/aquamate/questions',
@@ -39,10 +58,11 @@ const questionRoutes = [
             message: "Unable to get the question details"
           }).code(500);
         }
-      },
-      options: {
-        auth: 'jwt'
-    }
+      }
+    //   ,
+    //   options: {
+    //     auth: 'jwt'
+    // }
     },
     {
       method: 'DELETE',
@@ -61,10 +81,11 @@ const questionRoutes = [
             message: "Error while deleting question"
           }).code(500);
         }
-      },
-      options: {
-        auth: 'jwt'
-    }
+      }
+    //   ,
+    //   options: {
+    //     auth: 'jwt'
+    // }
     }
   ];
   

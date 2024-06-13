@@ -7,7 +7,7 @@ const routes = require('./routes/index');
  
 (async () => {
     const server = Hapi.server({
-        port: 3000,
+        port: 5000,
         host: '0.0.0.0',
         routes: {
             cors: {
@@ -16,30 +16,30 @@ const routes = require('./routes/index');
         },
     });
 
-        // Register JWT plugin
-        await server.register(Jwt);
+        // // Register JWT plugin
+        // await server.register(Jwt);
     
-        // Define JWT authentication strategy
-        server.auth.strategy('jwt', 'jwt', {
-            keys: 'UswB8Kzwwm', // Mengambil secret key dari .env
-            verify: {
-                aud: false,
-                iss: false,
-                sub: false,
-                nbf: true,
-                exp: true,
-                maxAgeSec: 14400, // 4 hours
-                timeSkewSec: 15
-            },
-            validate: (artifacts, request, h) => {
-                return {
-                    isValid: true,
-                    credentials: { user: artifacts.decoded.payload.user }
-                };
-            }
-        });
+        // // Define JWT authentication strategy
+        // server.auth.strategy('jwt', 'jwt', {
+        //     keys: 'UswB8Kzwwm', // Mengambil secret key dari .env
+        //     verify: {
+        //         aud: false,
+        //         iss: false,
+        //         sub: false,
+        //         nbf: true,
+        //         exp: true,
+        //         maxAgeSec: 14400, // 4 hours
+        //         timeSkewSec: 15
+        //     },
+        //     validate: (artifacts, request, h) => {
+        //         return {
+        //             isValid: true,
+        //             credentials: { user: artifacts.decoded.payload.user }
+        //         };
+        //     }
+        // });
     
-        server.auth.default('jwt');
+        // server.auth.default('jwt');
 
    
     const model = await loadModel();

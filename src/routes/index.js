@@ -16,7 +16,7 @@ const routes = [
     ...questionRoutes,
     ...answerRoutes,
     ...dictionaryRoutes,
-    ...authRoutes
+    // ...authRoutes
 ];
 
 module.exports = routes;
