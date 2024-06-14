@@ -1,6 +1,6 @@
 const questionRoutes = require('./question');
 const answerRoutes = require('./answer');
-const predictRoutes = require('./predict');
+const predictRoutes = require('./predict')
 const dictionaryRoutes = require('./dictionary');
 const authRoutes = require('./auth');
 
