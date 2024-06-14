@@ -27,8 +27,6 @@ const predictRoutes = [
         const  { image }  = request.payload;
         const { model } = request.server.app;
 
-        console.log('Received file:', image);
-
         const imageUrl = await uploadImage(image);
 
         const imageBuffer = await fs.readFile(image.path);

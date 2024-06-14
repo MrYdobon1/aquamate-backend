@@ -11,17 +11,17 @@ class Question {
     return questionRef.id;
   }
 
-  static async findById(id) {
-    const questionDoc = await db.collection('questions').doc(id).get();
-    if (!questionDoc.exists) {
-      throw new Error('Question not found');
+  static async getById(id) {
+    try {
+      const doc = await db.collection('questions').doc(id).get();
+      if (!doc.exists) {
+        throw new Error('No such document!');
+      }
+      return { id: doc.id, ...doc.data() };
+    } catch (error) {
+      console.error('Error getting document:', error);
+      throw new Error('Unable to retrieve question entry');
     }
-    return questionDoc.data();
-  }
-
-  static async getAll() {
-    const questionsSnapshot = await db.collection('questions').get();
-    return questionsSnapshot.docs.map(doc => doc.data());
   }
 
   static async getAllWithAnswers() {
@@ -38,14 +38,6 @@ class Question {
       })
     );
     return questions;
-  }
-
-  static async update(id, data) {
-    const questionRef = db.collection('questions').doc(id);
-    await questionRef.update({
-      ...data,
-      updatedAt: FieldValue.serverTimestamp(),
-    });
   }
 
   static async delete(id) {

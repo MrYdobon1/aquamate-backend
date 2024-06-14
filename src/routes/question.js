@@ -65,6 +65,29 @@ const questionRoutes = [
     // }
     },
     {
+      method: 'GET',
+      path: '/aquamate/questions/{id}',
+      handler: async (request, h) => {
+        try {
+          const id = request.params.id;
+          const questionEntry = await questionDB.getById(id);
+          return h.response({
+            status: true,
+            data: questionEntry
+          }).code(200);
+        } catch (e) {
+          return h.response({
+            status: false,
+            message: "Unable to get the question entry details"
+          }).code(500);
+        }
+      }
+    //   ,
+    //   options: {
+    //     auth: 'jwt'
+    // }
+    },
+    {
       method: 'DELETE',
       path: '/aquamate/questions/{id}',
       handler: async (request, h) => {

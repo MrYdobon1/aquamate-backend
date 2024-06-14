@@ -8,7 +8,7 @@ class Dictionary{
           ...data,
           createdAt: FieldValue.serverTimestamp(),
         });
-        return answerRef.id;
+        return answerRef.id;A
       }
       static async getAll() {
         try {
