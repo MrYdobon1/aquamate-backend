@@ -1,4 +1,4 @@
-# forum-backend
+# aquamate-backend
 
 endpoint for questions (GET, POST, GET by ID, DELETE)
 http://34.101.207.223:3000/aquamate/questions
