@@ -3,7 +3,7 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
 const storage = new Storage({
-  keyFilename: path.join(__dirname, 'capstone-project-425412-d1c7093550b5.json'),
+  keyFilename: path.join(__dirname, 'capstone-project-425412-bd557456858a.json'),
 });
 
 const bucketName = 'aquamate-backend';
